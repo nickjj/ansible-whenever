@@ -80,6 +80,10 @@ every 1.day, at: '4:00 am' do
 end
 ```
 
+## Ansible galaxy
+
+You can find it on the official [ansible galaxy](https://galaxy.ansible.com/list#/roles/958) if you want to rate it.
+
 ## License
 
 MIT
