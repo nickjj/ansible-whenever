@@ -1,0 +1,24 @@
+---
+- name: detect whenever binary
+  stat: path={{ whenever_binary_path }}
+  register: whenever_binary
+
+- name: detect whenever config
+  stat: path={{ whenever_config_path }}
+  register: whenever_config
+
+- name: update whenever crontabs
+  command: "{{ rails_deploy_bundle }} exec whenever --update-crontab {{ item }} chdir={{ rails_deploy_path }}"
+  sudo: false
+  remote_user: "{{ rails_deploy_user }}"
+  when: whenever_binary.stat.exists and whenever_config.stat.exists and repo_status.changed and whenever_update is iterable
+  with_items: whenever_update
+  environment: rails_deploy_env
+
+- name: clear whenever crontabs
+  command: "{{ rails_deploy_bundle }} exec whenever --clear-crontab {{ item }} chdir={{ rails_deploy_path }}"
+  sudo: false
+  remote_user: "{{ rails_deploy_user }}"
+  when: whenever_binary.stat.exists and whenever_config.stat.exists and repo_status.changed and whenever_clear is iterable
+  with_items: whenever_clear
+  environment: rails_deploy_env
