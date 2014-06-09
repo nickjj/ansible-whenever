@@ -1,9 +1,5 @@
 whenever_binary_path: "{{ rails_deploy_path }}/bin/whenever"
 whenever_config_path: "{{ rails_deploy_path }}/config/schedule.rb"
-whenever_update:
-#  - sitemap
-#  - foo
-#  - bar
 whenever_clear:
 #  - sitemap
 #  - foo
