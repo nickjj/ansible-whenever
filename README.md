@@ -19,11 +19,15 @@ whenever_binary_path: "{{ rails_deploy_path }}/bin/whenever"
 # The path to the schedule config.
 whenever_config_path: "{{ rails_deploy_path }}/config/schedule.rb"
 
-# 0 or more crontabs to clear.
+# 0 or more whenever identifiers to update
+whenever_update:
+#  - myapp
+#  - anotherapp
+
+# 0 or more whenever identifiers to clear
 whenever_clear:
-#  - sitemap
-#  - foo
-#  - bar
+#  - myapp
+#  - anotherapp
 ```
 
 ## Example playbook
@@ -46,8 +50,8 @@ Let's say you want to edit a few defaults, you can do this by opening or creatin
 
 ```
 ---
-whenever_update:
-  - sitemap
+whenever_clear:
+  - myapp
 ```
 
 ## Installation
