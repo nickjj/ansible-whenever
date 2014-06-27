@@ -4,8 +4,9 @@
   sudo: true
   vars:
     rails_deploy_user: travis
-    rails_deploy_bundle: /usr/local/rvm/wrappers/default/bundle
-    rails_deploy_path: /home/travis/build/nickjj/ansible-whenever/tests/railsapp
+    rails_deploy_path: /tmp/app.git
+    rails_deploy_ssh_keypair_local_path: /tmp
+    rails_deploy_git_url: "file:///home/travis/build/nickjj/ansible-whenever/tests/railsapp"
 
     rails_deploy_env:
       RAILS_ENV: production
@@ -18,4 +19,5 @@
 
   roles:
     - nickjj.ruby
+    - nickjj.rails
     - ansible-whenever
