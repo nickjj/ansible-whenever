@@ -3,6 +3,13 @@
   remote_user: travis
   sudo: true
   vars:
+    rails_deploy_user: travis
+    rails_deploy_bundle: /usr/local/rvm/wrappers/default/bundle
+    rails_deploy_path: /home/travis/build/nickjj/ansible-whenever/tests/railsapp
+
+    rails_deploy_env:
+      RAILS_ENV: production
+
     whenever_update:
       - testapp
 
