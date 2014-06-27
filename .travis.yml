@@ -30,7 +30,7 @@ script:
     && (echo 'Cron set test: pass' && exit 0)
     || (echo 'Cron set test: fail' && exit 1)
   - > 
-    sleep 120 & cat /tmp/whenever
+    sleep 61 && cat /tmp/whenever
     | grep -q 'whenever is awesome'
     && (echo 'Cron worked test: pass' && exit 0)
     || (echo 'Cron worked test: fail' && exit 1)
