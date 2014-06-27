@@ -8,7 +8,7 @@
   register: whenever_config
 
 - name: update whenever crontabs
-  command: "{{ rails_deploy_bundle }} exec bin/whenever --update-crontab {{ item }} chdir={{ rails_deploy_path }}"
+  command: "{{ rails_deploy_bundle }} exec whenever --update-crontab {{ item }} chdir={{ rails_deploy_path }}"
   sudo: false
   remote_user: "{{ rails_deploy_user }}"
   when: whenever_binary.stat.exists and whenever_config.stat.exists and whenever_update is iterable and rails_repo_status_changed
@@ -16,7 +16,7 @@
   environment: rails_deploy_env
 
 - name: clear whenever crontabs
-  command: "{{ rails_deploy_bundle }} exec bin/whenever --clear-crontab {{ item }} chdir={{ rails_deploy_path }}"
+  command: "{{ rails_deploy_bundle }} exec whenever --clear-crontab {{ item }} chdir={{ rails_deploy_path }}"
   sudo: false
   remote_user: "{{ rails_deploy_user }}"
   when: whenever_binary.stat.exists and whenever_config.stat.exists and whenever_clear is iterable
