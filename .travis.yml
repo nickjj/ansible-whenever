@@ -24,14 +24,13 @@ script:
     | grep -q 'changed=2.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
-  - "sleep 6"
   - >
     crontab -l
     | grep -q 'whenever is awesome'
     && (echo 'Cron set test: pass' && exit 0)
     || (echo 'Cron set test: fail' && exit 1)
   - > 
-    cat ~/whenever
+    sleep 10 & cat /tmp/whenever
     | grep -q 'whenever is awesome'
     && (echo 'Cron worked test: pass' && exit 0)
     || (echo 'Cron worked test: fail' && exit 1)
