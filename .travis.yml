@@ -25,13 +25,13 @@ script:
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
   - "sleep 6"
-  - >
+  - > 
     cat ~/whenever
     | grep -q 'whenever is awesome'
     && (echo 'Cron set test: pass' && exit 0)
     || (echo 'Cron set test: fail' && exit 1)
   - >
-    ansible-playbook $SITE_AND_INVENTORY --connection=local -vvvv --extra-vars "whenever_clear=['testapp']"
+    ansible-playbook $SITE_AND_INVENTORY --connection=local -vvvv --extra-vars '{"whenever_clear":["testapp"]}'
   - >
     crontab -l
     | grep -q 'whenever is awesome'
