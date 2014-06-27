@@ -29,7 +29,7 @@ script:
     cat ~/whenever
     | grep -q 'whenever is awesome'
     && (echo 'cron set test: pass' && exit 0)
-    || (echo 'cron set: fail' && exit 1)
+    || (echo 'cron set test: fail' && exit 1)
   - >
     ansible-playbook $SITE_AND_INVENTORY --connection=local -vvvv --extra-vars 'whenever_clear=[testapp]'"
   - >
