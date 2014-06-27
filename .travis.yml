@@ -24,6 +24,7 @@ script:
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
+  - "sleep 6"
   - >
     cat ~/whenever
     | grep -q 'whenever is awesome'
