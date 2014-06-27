@@ -1,4 +1,4 @@
-## What is ansible-whenever?
+## What is ansible-whenever? [![Build Status](https://secure.travis-ci.org/nickjj/ansible-whenever.png)](http://travis-ci.org/nickjj/ansible-whenever)
 
 It is an [ansible](http://www.ansible.com/home) role to control the ruby gem whenever.
 

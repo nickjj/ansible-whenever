@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  remote_user: travis
+  sudo: true
+  vars:
+    whenever_update:
+      - testapp
+
+  roles:
+    - nickjj.ruby
+    - ansible-whenever

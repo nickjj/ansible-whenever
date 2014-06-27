@@ -1,0 +1,38 @@
+---
+language: "python"
+python: "2.7"
+
+env:
+  - SITE_AND_INVENTORY="tests/test.yml -i tests/inventory"
+
+before_install:
+  - "__rvm_unload ; rm -rf ~/.rvm"
+  - "ssh-keygen -t rsa -P '' -f /tmp/id_rsa"
+
+install:
+  - "pip install ansible==1.6.2"
+  - "printf '[defaults]\nroles_path = ../' > ansible.cfg"
+  - "ansible-galaxy install nickjj.ruby --force"
+
+script:
+  - "git config --global user.email 'foo@bar.com' && git config --global user.name 'Foo Bar'"
+  - "cd tests/railsapp && git init && git add -A && git commit -m 'Initial commit' && cd -"
+  - "ansible-playbook $SITE_AND_INVENTORY --syntax-check"
+  - "ansible-playbook $SITE_AND_INVENTORY --connection=local -vvvv"
+  - >
+    ansible-playbook $SITE_AND_INVENTORY --connection=local
+    | grep -q 'changed=0.*failed=0'
+    && (echo 'Idempotence test: pass' && exit 0)
+    || (echo 'Idempotence test: fail' && exit 1)
+  - >
+    cat ~/whenever
+    | grep -q 'whenever is awesome'
+    && (echo 'cron set test: pass' && exit 0)
+    || (echo 'cron set: fail' && exit 1)
+  - >
+    ansible-playbook $SITE_AND_INVENTORY --connection=local -vvvv --extra-vars 'whenever_clear=[testapp]'"
+  - >
+    crontab -l
+    | grep -q 'whenever is awesome'
+    && (echo 'cron clear test: pass' && exit 1)
+    || (echo 'cron clear test: fail' && exit 0)
