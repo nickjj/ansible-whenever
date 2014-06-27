@@ -37,6 +37,9 @@ script:
     || (echo 'Cron worked test: fail' && exit 1)
   - >
     ansible-playbook $SITE_AND_INVENTORY --connection=local --extra-vars '{"whenever_clear":["testapp"]}'
+    | grep -q 'changed=3.*failed=0'
+    && (echo 'Whenever clear test: pass' && exit 0)
+    || (echo 'Whenever clear test: fail' && exit 1)
   - >
     crontab -l
     | grep -q 'whenever is awesome'
